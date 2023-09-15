@@ -1,4 +1,5 @@
 const express = require('express');
+const randomPhrases = require('./models/randomPhrases');
 const app = express();
 const port = 3000;
 
@@ -10,6 +11,18 @@ app.get('/greeting', (req,res) => {
 app.get('/tip', (req,res) => {
     res.send(`<h2>Tip Calculator</h2>`)
 })
+
+app.get('/magic', (req,res) => {
+    res.send(`<h1>Random phrase</h1>`)
+})
+
+app.get('/magic/:randomPhrase', (req,res) => {
+    // console.log(res.send(randomPhrases[req.params.randomPhrase]))
+    console.log(randomPhrases)
+    var onePhraseatRandom = randomPhrases[Math.floor(Math.random()*randomPhrases.length)]
+    // console.log(randomPhrases[Math.floor(Math.random()*randomPhrases.length)])
+    res.send(`<h1> ${req.params.randomPhrase} <br> ${onePhraseatRandom} </h1>`
+)})
 
 app.get('/tip/:total', (req,res) => {
     console.log(req.params)
